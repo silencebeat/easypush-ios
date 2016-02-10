@@ -8,18 +8,38 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ReqListener {
 
+    var pushHelper: PushHelper?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        pushHelper = PushHelper(requestListener: self)
+        
+        pushHelper?.addParam("email", value: "mailbox.candra@gmail.com")
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func btnSubscribeTapped(sender: UIButton) {
+        pushHelper?.subscribe("http://geni.diskonan.id")
+    }
 
+    @IBAction func btnUnsubscribeTapped(sender: UIButton) {
+        pushHelper?.unSubscribe("http://geni.diskonan.id")
+    }
+    
+    func onFailed(message: String, errorStatus: Int) {
+        print("\(message) errorStatus: \(errorStatus)")
+    }
+    
+    func onFinish(result: String) {
+        print("\(result)")
+    }
 }
 
