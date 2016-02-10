@@ -10,6 +10,11 @@ import Foundation
 import Alamofire
 import UIKit
 
+public protocol ReqListener {
+    func onFinish(result: String) -> Void
+    func onFailed(message: String, errorStatus: Int) -> Void
+}
+
 class PushHelper {
 
     private var requestListener: ReqListener?
@@ -38,20 +43,13 @@ class PushHelper {
         params = [DEVICE: device , APP_ID : deviceToken, DEVICE_ID: getUUID()]
     }
     
-    init(){
-        if APIQUE_KEY == "" {
-            print("please add APIQUE_KEY value in info.plist")
-        }
-        self.headers = ["Authentication" : APIQUE_KEY]
-        params = [DEVICE: device , APP_ID : "", DEVICE_ID: ""]
-    }
-    
     func addParam (key: String, value: String) {
         self.params?.updateValue(value, forKey: key)
         
     }
     
     func subscribe(URL: String){
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
             self.isFinish = false
             sendPostRequest(URL)
@@ -60,6 +58,7 @@ class PushHelper {
 
     
     func unSubscribe(URL: String){
+        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
             self.isFinish = false
             sendPostRequest(URL)
@@ -72,6 +71,7 @@ class PushHelper {
             .responseString { response in
                 self.isFinish = true
                 var message = ""
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
                 
                 switch response.result {
                 case .Success:
@@ -108,6 +108,8 @@ class PushHelper {
                     } else {
                         message = (response.result.error?.description)!
                     }
+                    
+                    print("\(statusCode)")
                     
                     if self.requestListener != nil {
                         self.requestListener!.onFailed(message, errorStatus: statusCode!)

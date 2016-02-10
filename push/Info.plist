@@ -35,8 +35,8 @@
 
 	<key>NSAppTransportSecurity</key>
 	<dict>
-      <key>NSAllowsArbitraryLoads</key>
-      <false/>
+      	<key>NSAllowsArbitraryLoads</key>
+      	<false/>
        <key>NSExceptionDomains</key>
        <dict>
             <key>demo.easypush.rocks</key>
@@ -49,9 +49,6 @@
                 <string>TLSv1.1</string>
             </dict>
        </dict>
-	</dict>
-    	</dict>
-  	</dict>
 	</dict>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
