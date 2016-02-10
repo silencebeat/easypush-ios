@@ -17,7 +17,7 @@ class ViewController: UIViewController, ReqListener {
         
         pushHelper = PushHelper(requestListener: self)
         
-        pushHelper?.addParam("email", value: "mailbox.candra@gmail.com")
+        pushHelper?.addParam("email", value: "youremail@company.com")
         
         
     }
@@ -27,11 +27,11 @@ class ViewController: UIViewController, ReqListener {
     }
 
     @IBAction func btnSubscribeTapped(sender: UIButton) {
-        pushHelper?.subscribe("http://geni.diskonan.id")
+        pushHelper?.subscribe("http://demo.easypush.rocks")
     }
 
     @IBAction func btnUnsubscribeTapped(sender: UIButton) {
-        pushHelper?.unSubscribe("http://geni.diskonan.id")
+        pushHelper?.unSubscribe("http://demo.easypush.rocks")
     }
     
     func onFailed(message: String, errorStatus: Int) {
