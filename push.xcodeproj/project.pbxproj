@@ -42,7 +42,6 @@
 		7EA32E1F1C69A2C600BBC179 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7EA32E221C69A2C600BBC179 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7EA32E241C69A2C600BBC179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7EA32E2A1C69A30300BBC179 /* Push_Development.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = Push_Development.mobileprovision; sourceTree = "<group>"; };
 		A56542428318FBE58889AD55 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -105,7 +104,6 @@
 				7EA32E1F1C69A2C600BBC179 /* Assets.xcassets */,
 				7EA32E211C69A2C600BBC179 /* LaunchScreen.storyboard */,
 				7EA32E241C69A2C600BBC179 /* Info.plist */,
-				7EA32E2A1C69A30300BBC179 /* Push_Development.mobileprovision */,
 			);
 			path = push;
 			sourceTree = "<group>";
@@ -147,6 +145,20 @@
 					7EA32E141C69A2C600BBC179 = {
 						CreatedOnToolsVersion = 7.2.1;
 						DevelopmentTeam = 6BDLU8QY97;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.WAC = {
+								enabled = 0;
+							};
+							com.apple.Wallet = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};

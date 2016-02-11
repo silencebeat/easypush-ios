@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -18,25 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdl-7t-HLF">
-                                <rect key="frame" x="116" y="291" width="89" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="89" id="Oa4-1M-Cun"/>
-                                    <constraint firstAttribute="height" constant="30" id="ozc-R4-ANU"/>
-                                </constraints>
-                                <state key="normal" title="Unsubscribe"/>
-                                <connections>
-                                    <action selector="btnUnsubscribeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yiU-PM-we8"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M6D-AS-PQV">
-                                <rect key="frame" x="16" y="284" width="288" height="0.0"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1M-aN-42T">
-                                <rect key="frame" x="125" y="246" width="70" height="30"/>
+                                <rect key="frame" x="125" y="269" width="70" height="30"/>
                                 <state key="normal" title="Subscribe"/>
                                 <connections>
                                     <action selector="btnSubscribeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yqf-1U-h0p"/>
@@ -45,17 +27,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="M6D-AS-PQV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="BgX-ym-FBn"/>
-                            <constraint firstItem="M6D-AS-PQV" firstAttribute="top" secondItem="y1M-aN-42T" secondAttribute="bottom" constant="8" id="GM8-2v-grN"/>
-                            <constraint firstItem="Cdl-7t-HLF" firstAttribute="top" secondItem="M6D-AS-PQV" secondAttribute="bottom" constant="7" id="Yuu-a5-iNL"/>
-                            <constraint firstItem="M6D-AS-PQV" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="ak9-HS-F0w"/>
-                            <constraint firstItem="M6D-AS-PQV" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="fsZ-GZ-Z7p"/>
-                            <constraint firstItem="Cdl-7t-HLF" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hWl-Qs-5MZ"/>
+                            <constraint firstItem="y1M-aN-42T" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="E6H-RV-Xu2"/>
                             <constraint firstItem="y1M-aN-42T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nGc-M3-KRm"/>
-                            <constraint firstItem="M6D-AS-PQV" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="piR-mb-7nz"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="btnSubsribe" destination="y1M-aN-42T" id="oqR-87-ccq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

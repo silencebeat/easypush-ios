@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController, ReqListener {
 
     var pushHelper: PushHelper?
+    @IBOutlet var btnSubsribe: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +19,9 @@ class ViewController: UIViewController, ReqListener {
         pushHelper = PushHelper(requestListener: self)
         
         pushHelper?.addParam("email", value: "youremail@company.com")
-        
-        
+        pushHelper?.addParam("name", value: "yourname")
+        pushHelper?.addParam("image_path", value: "http://mydomain.com/my_image.jpg")
+   
     }
 
     override func didReceiveMemoryWarning() {
@@ -27,19 +29,25 @@ class ViewController: UIViewController, ReqListener {
     }
 
     @IBAction func btnSubscribeTapped(sender: UIButton) {
-        pushHelper?.subscribe("http://demo.easypush.rocks")
-    }
-
-    @IBAction func btnUnsubscribeTapped(sender: UIButton) {
-        pushHelper?.unSubscribe("http://demo.easypush.rocks")
+        if btnSubsribe.titleLabel?.text == "Subscribe" {
+            pushHelper?.subscribe("http://192.168.1.18/pushnotification/api/user/login")
+        }else {
+            pushHelper?.subscribe("http://192.168.1.18/pushnotification/api/user/logout")
+        }
+        
     }
     
     func onFailed(message: String, errorStatus: Int) {
         print("\(message) errorStatus: \(errorStatus)")
     }
     
-    func onFinish(result: String) {
+    func onSuccess(result: String) {
         print("\(result)")
+        if btnSubsribe.titleLabel?.text == "Subscribe" {
+            btnSubsribe.setTitle("Unsubscribe", forState: .Normal)
+        }else {
+            btnSubsribe.setTitle("Subscribe", forState: .Normal)
+        }
     }
 }
 

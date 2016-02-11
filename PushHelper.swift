@@ -11,19 +11,15 @@ import Alamofire
 import UIKit
 
 public protocol ReqListener {
-    func onFinish(result: String) -> Void
+    func onSuccess(result: String) -> Void
     func onFailed(message: String, errorStatus: Int) -> Void
 }
 
 class PushHelper {
 
     private var requestListener: ReqListener?
-    private var device = "ios"
     private var isFinish = true
-    private var params: [String : AnyObject]?
-    private let DEVICE_ID = "deviceId"
-    private let APP_ID = "appId"
-    private let DEVICE = "device"
+    private var params = ["" : ""]
     private var headers: [String : String]?
     let defaults = NSUserDefaults.standardUserDefaults()
     
@@ -35,20 +31,22 @@ class PushHelper {
         }
         self.headers = ["Authentication" : APIQUE_KEY]
         
+        params = ["device" : "ios" , "device_id" : getUUID()]
+    }
+    
+    func addParam (key: String, value: String) {
+        self.params.updateValue(value, forKey: key)
+    }
+    
+    func subscribe(URL: String){
         var deviceToken = ""
         if let tokenString = defaults.stringForKey("DEVICETOKEN") {
             deviceToken = tokenString
         }
         
-        params = [DEVICE: device , APP_ID : deviceToken, DEVICE_ID: getUUID()]
-    }
-    
-    func addParam (key: String, value: String) {
-        self.params?.updateValue(value, forKey: key)
+        print("app_id = \(deviceToken)")
         
-    }
-    
-    func subscribe(URL: String){
+        self.params.updateValue(deviceToken, forKey: "app_id")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
             self.isFinish = false
@@ -58,6 +56,11 @@ class PushHelper {
 
     
     func unSubscribe(URL: String){
+        var deviceToken = ""
+        if let tokenString = defaults.stringForKey("DEVICETOKEN") {
+            deviceToken = tokenString
+        }
+        self.params.updateValue(deviceToken, forKey: "app_id")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
             self.isFinish = false
@@ -67,22 +70,21 @@ class PushHelper {
     
     private func sendPostRequest(URL: String){
         
-        Alamofire.request(.POST, URL, parameters: params, encoding: .JSON, headers: headers)
+        Alamofire.request(.POST, URL, parameters: self.params, encoding: .URL, headers: headers)
             .responseString { response in
                 self.isFinish = true
                 var message = ""
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 
                 switch response.result {
                 case .Success:
                     if response.response?.statusCode == 500 {
                         if self.requestListener != nil {
-                            self.requestListener!.onFailed("Server error", errorStatus: (response.response?.statusCode)!)
+                            self.requestListener!.onFailed(response.result.value!, errorStatus: (response.response?.statusCode)!)
                         }
                     } else {
                         if self.requestListener != nil {
-                            print("\(response.response?.statusCode)")
-                            self.requestListener!.onFinish(response.result.value!)
+                            self.requestListener!.onSuccess(response.result.value!)
                         }
                     }
  
@@ -103,13 +105,11 @@ class PushHelper {
                         message = "Resource error"
                     
                     } else if statusCode == 500 {
-                        message = "Server error"
+                        message = "Internal Server Error"
                     
                     } else {
                         message = (response.result.error?.description)!
                     }
-                    
-                    print("\(statusCode)")
                     
                     if self.requestListener != nil {
                         self.requestListener!.onFailed(message, errorStatus: statusCode!)
