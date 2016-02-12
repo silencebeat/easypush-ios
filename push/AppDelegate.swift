@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
+        print("\(UIApplication.sharedApplication().isRegisteredForRemoteNotifications())")
+        
         return true
     }
 
@@ -56,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
-        print("\(error)")
+        print("failed to register 'coz \(error)")
     }
     
   
