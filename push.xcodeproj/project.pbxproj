@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04DEBFBBA9F65BBC6CE9B6AC /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A56542428318FBE58889AD55 /* Pods.framework */; };
-		7E9105C61C69E57500AA145A /* PushHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9105C31C69E57500AA145A /* PushHelper.swift */; };
+		7E1B4F2D1C6DE2C7006EAF2B /* PushHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1B4F2C1C6DE2C7006EAF2B /* PushHelper.swift */; };
 		7EA32E191C69A2C600BBC179 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA32E181C69A2C600BBC179 /* AppDelegate.swift */; };
 		7EA32E1B1C69A2C600BBC179 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EA32E1A1C69A2C600BBC179 /* ViewController.swift */; };
 		7EA32E1E1C69A2C600BBC179 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EA32E1C1C69A2C600BBC179 /* Main.storyboard */; };
@@ -32,7 +32,7 @@
 /* Begin PBXFileReference section */
 		24E848A71DCBF8A980D63036 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3EA87F469F9E2ADCD6854998 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		7E9105C31C69E57500AA145A /* PushHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushHelper.swift; path = ../PushHelper.swift; sourceTree = "<group>"; };
+		7E1B4F2C1C6DE2C7006EAF2B /* PushHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushHelper.swift; sourceTree = "<group>"; };
 		7E9105C91C69E6BD00AA145A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "Pods/../build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		7E9105D11C69EE1100AA145A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = "../../CandraLatihanIos/CandraLagiIseng/Alamofire/build/Debug-iphoneos/Alamofire.framework"; sourceTree = "<group>"; };
 		7EA32E151C69A2C600BBC179 /* push.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = push.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -97,7 +97,7 @@
 		7EA32E171C69A2C600BBC179 /* push */ = {
 			isa = PBXGroup;
 			children = (
-				7E9105C31C69E57500AA145A /* PushHelper.swift */,
+				7E1B4F2C1C6DE2C7006EAF2B /* PushHelper.swift */,
 				7EA32E181C69A2C600BBC179 /* AppDelegate.swift */,
 				7EA32E1A1C69A2C600BBC179 /* ViewController.swift */,
 				7EA32E1C1C69A2C600BBC179 /* Main.storyboard */,
@@ -246,7 +246,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7E9105C61C69E57500AA145A /* PushHelper.swift in Sources */,
+				7E1B4F2D1C6DE2C7006EAF2B /* PushHelper.swift in Sources */,
 				7EA32E1B1C69A2C600BBC179 /* ViewController.swift in Sources */,
 				7EA32E191C69A2C600BBC179 /* AppDelegate.swift in Sources */,
 			);
