@@ -1,5 +1,5 @@
 # easypush-ios
-  easypush-ios is an example project to handle connection with easypush server. Please feel free if you have question about this project
+  easypush-ios is an ios example project to handle connection with easypush server. Please feel free if you have question about this project
 
 # Requirements
   1. Ios 8 and above
