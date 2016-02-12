@@ -26,10 +26,10 @@ class PushHelper {
     init(requestListener: ReqListener){
         self.requestListener = requestListener
         
-        if APIQUE_KEY == "" {
-            print("please add APIQUE_KEY value in info.plist")
+        if EASYPUSH_KEY == "" {
+            print("please add EASYPUSH_KEY value in info.plist")
         }
-        self.headers = ["Authentication" : APIQUE_KEY]
+        self.headers = ["Authentication" : EASYPUSH_KEY]
         
         params = ["device" : "ios" , "device_id" : getUUID()]
     }
@@ -102,7 +102,7 @@ class PushHelper {
                     let statusCode = response.response?.statusCode
                     
                     if statusCode == 400 {
-                        message = "Invalid APIQUE_KEY"
+                        message = "Invalid EASYPUSH_KEY"
                     
                     } else if statusCode == 401 {
                         message = "You need valid credentials for me to respond to this request"
@@ -128,15 +128,15 @@ class PushHelper {
         }
     }
     
-    private var APIQUE_KEY: String {
+    private var EASYPUSH_KEY: String {
         let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
         
-        if dict?.objectForKey("APIQUE_KEY") == nil {
+        if dict?.objectForKey("EASYPUSH_KEY") == nil {
             return ""
         }
         
-        let test: AnyObject = dict!.objectForKey("APIQUE_KEY")!
+        let test: AnyObject = dict!.objectForKey("EASYPUSH_KEY")!
         
         return test as! String
     }

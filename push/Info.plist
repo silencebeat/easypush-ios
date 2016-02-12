@@ -2,7 +2,7 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>APIQUE_KEY</key>
+	<key>EASYPUSH_KEY</key>
 	<string>3156df29bae2213d65e4b199e1a6f180ade81926</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
