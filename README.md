@@ -1,5 +1,5 @@
 # easypush-ios
-  easypush-ios is an ios basic example project to handle connection with **easypush** server. You can modify as long as you need depends on your requirements. 
+  easypush-ios is an ios basic example project to handle connection with **easypush** server. You can modify as you need depends on your requirements. 
   Please feel free if you have question about this project
 
 # Requirements
