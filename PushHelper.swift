@@ -44,7 +44,10 @@ class PushHelper {
             deviceToken = tokenString
         }
         
-        print("app_id = \(deviceToken)")
+        if deviceToken == "" {
+            print("has no token")
+            return
+        }
         
         self.params.updateValue(deviceToken, forKey: "app_id")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
@@ -60,6 +63,12 @@ class PushHelper {
         if let tokenString = defaults.stringForKey("DEVICETOKEN") {
             deviceToken = tokenString
         }
+        
+        if deviceToken == "" {
+            print("has no token")
+            return
+        }
+        
         self.params.updateValue(deviceToken, forKey: "app_id")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
