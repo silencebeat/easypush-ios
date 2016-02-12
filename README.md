@@ -1,16 +1,17 @@
 # easypush-ios
-  easypush-ios is an ios example project to handle connection with easypush server. Please feel free if you have question about this project
+  easypush-ios is an ios basic example project to handle connection with **easypush** server. You can modify as long as you need depends on your requirements. 
+  Please feel free if you have question about this project
 
 # Requirements
   1. Ios 8 and above
-  2. Written by swift programming language
+  2. Using swift programming language
 
 # How to use
   1. First you need to copy PushHelper.swift class into your project. 
   2. Initialize PushHelper class into your class
   3. Implement RequestDelegate
   4. PushHelper class require 3 parameters, **"baseUrl", "key" and "requestDelegate"**
-     **"baseUrl"** is your domain **"url"** that already installed easypush server, and key is a **TOKEN** from your easypush server
+     **baseUrl** is your domain **url** that already installed easypush server, and key is a **TOKEN** from your easypush server
   
   Example : 
   ```
