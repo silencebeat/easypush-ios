@@ -99,4 +99,4 @@ class ViewController: UIViewController, RequestDelegate {
   This project is completely free to use. 
 
 # Credits
-  This project using [I'm an inline-style link with title](https://github.com/Alamofire/Alamofire "Alamofire") as the third party library to handle Http Request connection.
+  This project using [Alamofire](https://github.com/Alamofire/Alamofire "Alamofire") as the third party library to handle Http Request connection.
