@@ -9,8 +9,8 @@
   1. First you need to copy PushHelper.swift class into your project. 
   2. Initialize PushHelper class into your class
   3. Implement RequestDelegate
-  4. PushHelper class require 3 parameters, "baseUrl", "key" and "requestDelegate"
-     baseUrl is your domain url that already installed easypush server, and key is a TOKEN from your easypush server
+  4. PushHelper class require 3 parameters, **"baseUrl", "key" and "requestDelegate"**
+     **"baseUrl"** is your domain **"url"** that already installed easypush server, and key is a **TOKEN** from your easypush server
   
   Example : 
   ```
@@ -31,11 +31,37 @@ class ViewController: UIViewController, RequestDelegate {
 }
   ```
   
-  note:
+  Note: Please check the AppDelegate.swift. there are 2 modifications need
   
-
+  ```
+  /*
+    Register your app for remote notification and user notification setting
+  */
+  func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool   {
+        // Override point for customization after application launch.
+        let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        
+        return true
+  }
+  /*
+    Save device token into cache with key "DEVICETOKEN"
+  */
+  func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
+        let characterSet: NSCharacterSet = NSCharacterSet( charactersInString: "<>" )
+        let deviceTokenString: String = ( deviceToken.description as NSString )
+            .stringByTrimmingCharactersInSet( characterSet )
+            .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
+        print("devicetokenstring: \(deviceTokenString)")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setValue(deviceTokenString, forKey: "DEVICETOKEN")
+  }
+  
+  ```
+  
 # Subscribe
-  Require 2 parameters, name and email. you can add imagePath as optional parameter
+  Require 2 parameters, **name** and **email**. you can add **imagePath** as optional parameter
   
   ```
   pushHelper?.subscribe("yourname", email: "youremail@company.com")
@@ -96,7 +122,7 @@ class ViewController: UIViewController, RequestDelegate {
   ```
 
 # License
-  This project is completely free to use. 
+  This project is completely **free to use**. 
 
 # Credits
   This project using [Alamofire](https://github.com/Alamofire/Alamofire "Alamofire") as the third party library to handle Http Request connection.
