@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
         
-        print("\(UIApplication.sharedApplication().isRegisteredForRemoteNotifications())")
-        
         return true
     }
 
@@ -54,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             .stringByTrimmingCharactersInSet( characterSet )
             .stringByReplacingOccurrencesOfString( " ", withString: "" ) as String
         print("devicetokenstring: \(deviceTokenString)")
+        let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setValue(deviceTokenString, forKey: "DEVICETOKEN")
     }
     

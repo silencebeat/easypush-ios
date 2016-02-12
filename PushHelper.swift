@@ -17,7 +17,7 @@ public protocol RequestDelegate{
 
 class PushHelper {
 
-    private var requestDelegate: RequestDelegate?
+    var requestDelegate: RequestDelegate?
     private var isFinish = true
     private var params = ["" : ""]
     private var headers: [String : String]?
@@ -38,9 +38,16 @@ class PushHelper {
         self.headers = ["Authentication" : key]
         params = ["device" : "ios" , "device_id" : getUUID()]
     }
-    
 
     func subscribe(name: String, email: String, imagePath: String){
+        self.submit(name, email: email, imagePath: imagePath)
+    }
+    
+    func subscribe(name: String, email: String){
+        self.submit(name, email: email, imagePath: "")
+    }
+    
+    private func submit (name: String, email: String, imagePath: String) {
         var deviceToken = ""
         if let tokenString = defaults.stringForKey("DEVICETOKEN") {
             deviceToken = tokenString
@@ -56,8 +63,8 @@ class PushHelper {
         params.updateValue(imagePath, forKey: "image_path")
         params.updateValue(deviceToken, forKey: "app_id")
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             self.isFinish = false
             sendPostRequest(baseUrl + "/api/user/login")
         }
@@ -66,8 +73,8 @@ class PushHelper {
     
     func unSubscribe(){
         
-        UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
             self.isFinish = false
             sendPostRequest(baseUrl + "/api/user/logout")
         }
@@ -78,43 +85,24 @@ class PushHelper {
         Alamofire.request(.POST, URL, parameters: self.params, encoding: .URL, headers: headers)
             .responseString { response in
                 self.isFinish = true
-                var message = ""
                 UIApplication.sharedApplication().networkActivityIndicatorVisible = false
                 
                 switch response.result {
                 case .Success:
-                    if response.response?.statusCode == 500 {
-                        if self.requestDelegate != nil {
-                            self.requestDelegate!.onFailed(response.result.value!, errorStatus: (response.response?.statusCode)!)
-                        }
-                    } else {
+                    
+                    if response.response?.statusCode == 200 {
                         if self.requestDelegate != nil {
                             self.requestDelegate!.onSuccess(response.result.value!)
                         }
+                    }else {
+                        if self.requestDelegate != nil {
+                            self.requestDelegate!.onFailed(response.result.value!, errorStatus: (response.response?.statusCode)!)
+                        }
                     }
- 
                     break
                 case .Failure:
                     let statusCode = response.response?.statusCode
-                    
-                    if statusCode == 400 {
-                        message = "Invalid EASYPUSH_KEY"
-                    
-                    } else if statusCode == 401 {
-                        message = "You need valid credentials for me to respond to this request"
-                    
-                    } else if statusCode == 403 {
-                        message = "I understood your credentials, but sorry you're not allowed"
-                    
-                    } else if statusCode == 404 {
-                        message = "Resource error"
-                    
-                    } else if statusCode == 500 {
-                        message = "Internal Server Error"
-                    
-                    } else {
-                        message = (response.result.error?.description)!
-                    }
+                    let message = (response.result.error?.description)!
                     
                     if self.requestDelegate != nil {
                         self.requestDelegate!.onFailed(message, errorStatus: statusCode!)
