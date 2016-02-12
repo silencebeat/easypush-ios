@@ -10,35 +10,37 @@ import Foundation
 import Alamofire
 import UIKit
 
-public protocol ReqListener {
+public protocol RequestDelegate{
     func onSuccess(result: String) -> Void
     func onFailed(message: String, errorStatus: Int) -> Void
 }
 
 class PushHelper {
 
-    private var requestListener: ReqListener?
+    private var requestDelegate: RequestDelegate?
     private var isFinish = true
     private var params = ["" : ""]
     private var headers: [String : String]?
     let defaults = NSUserDefaults.standardUserDefaults()
+    var baseUrl = ""
     
-    init(requestListener: ReqListener){
-        self.requestListener = requestListener
-        
-        if EASYPUSH_KEY == "" {
-            print("please add EASYPUSH_KEY value in info.plist")
-        }
-        self.headers = ["Authentication" : EASYPUSH_KEY]
+    init(baseUrl: String, key: String, requestDelegate: RequestDelegate){
+        self.requestDelegate = requestDelegate
+        self.baseUrl = baseUrl
+
+        self.headers = ["Authentication" : key]
         
         params = ["device" : "ios" , "device_id" : getUUID()]
     }
     
-    func addParam (key: String, value: String) {
-        self.params.updateValue(value, forKey: key)
+    init(baseUrl: String, key: String){
+        self.baseUrl = baseUrl
+        self.headers = ["Authentication" : key]
+        params = ["device" : "ios" , "device_id" : getUUID()]
     }
     
-    func subscribe(URL: String){
+
+    func subscribe(name: String, email: String, imagePath: String){
         var deviceToken = ""
         if let tokenString = defaults.stringForKey("DEVICETOKEN") {
             deviceToken = tokenString
@@ -49,31 +51,25 @@ class PushHelper {
             return
         }
         
-        self.params.updateValue(deviceToken, forKey: "app_id")
+        params.updateValue(name, forKey: "name")
+        params.updateValue(email, forKey: "email")
+        params.updateValue(imagePath, forKey: "image_path")
+        params.updateValue(deviceToken, forKey: "app_id")
+        
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
             self.isFinish = false
-            sendPostRequest(URL)
+            sendPostRequest(baseUrl + "/api/user/login")
         }
     }
 
     
-    func unSubscribe(URL: String){
-        var deviceToken = ""
-        if let tokenString = defaults.stringForKey("DEVICETOKEN") {
-            deviceToken = tokenString
-        }
+    func unSubscribe(){
         
-        if deviceToken == "" {
-            print("has no token")
-            return
-        }
-        
-        self.params.updateValue(deviceToken, forKey: "app_id")
         UIApplication.sharedApplication().networkActivityIndicatorVisible = true
         if(self.isFinish){
             self.isFinish = false
-            sendPostRequest(URL)
+            sendPostRequest(baseUrl + "/api/user/logout")
         }
     }
     
@@ -88,12 +84,12 @@ class PushHelper {
                 switch response.result {
                 case .Success:
                     if response.response?.statusCode == 500 {
-                        if self.requestListener != nil {
-                            self.requestListener!.onFailed(response.result.value!, errorStatus: (response.response?.statusCode)!)
+                        if self.requestDelegate != nil {
+                            self.requestDelegate!.onFailed(response.result.value!, errorStatus: (response.response?.statusCode)!)
                         }
                     } else {
-                        if self.requestListener != nil {
-                            self.requestListener!.onSuccess(response.result.value!)
+                        if self.requestDelegate != nil {
+                            self.requestDelegate!.onSuccess(response.result.value!)
                         }
                     }
  
@@ -120,25 +116,12 @@ class PushHelper {
                         message = (response.result.error?.description)!
                     }
                     
-                    if self.requestListener != nil {
-                        self.requestListener!.onFailed(message, errorStatus: statusCode!)
+                    if self.requestDelegate != nil {
+                        self.requestDelegate!.onFailed(message, errorStatus: statusCode!)
                     }
                     break
                 }
         }
-    }
-    
-    private var EASYPUSH_KEY: String {
-        let path = NSBundle.mainBundle().pathForResource("Info", ofType: "plist")
-        let dict = NSDictionary(contentsOfFile: path!)
-        
-        if dict?.objectForKey("EASYPUSH_KEY") == nil {
-            return ""
-        }
-        
-        let test: AnyObject = dict!.objectForKey("EASYPUSH_KEY")!
-        
-        return test as! String
     }
     
     func getUUID() -> String {

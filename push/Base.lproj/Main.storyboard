@@ -18,8 +18,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y1M-aN-42T">
-                                <rect key="frame" x="125" y="269" width="70" height="30"/>
-                                <state key="normal" title="Subscribe"/>
+                                <rect key="frame" x="73" y="269" width="175" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="175" id="xSb-89-ca9"/>
+                                </constraints>
+                                <state key="normal" title="Subscribe">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="btnSubscribeTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yqf-1U-h0p"/>
                                 </connections>

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, ReqListener {
+class ViewController: UIViewController, RequestDelegate {
 
     var pushHelper: PushHelper?
     @IBOutlet var btnSubsribe: UIButton!
@@ -16,11 +16,7 @@ class ViewController: UIViewController, ReqListener {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        pushHelper = PushHelper(requestListener: self)
-        
-        pushHelper?.addParam("email", value: "youremail@company.com")
-        pushHelper?.addParam("name", value: "yourname")
-        pushHelper?.addParam("image_path", value: "http://mydomain.com/my_image.jpg")
+        pushHelper = PushHelper(baseUrl: "http://192.168.1.18/pushnotification", key: "3156df29bae2213d65e4b199e1a6f180ade81926", requestDelegate: self)
    
     }
 
@@ -30,9 +26,9 @@ class ViewController: UIViewController, ReqListener {
 
     @IBAction func btnSubscribeTapped(sender: UIButton) {
         if btnSubsribe.titleLabel?.text == "Subscribe" {
-            pushHelper?.subscribe("http://192.168.1.18/pushnotification/api/user/login")
+            pushHelper?.subscribe("yourname", email: "youremail@company.com", imagePath: "")
         }else {
-            pushHelper?.subscribe("http://192.168.1.18/pushnotification/api/user/logout")
+            pushHelper?.unSubscribe()
         }
         
     }
