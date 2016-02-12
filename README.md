@@ -10,7 +10,7 @@
   1. First you need to copy PushHelper.swift class into your project. 
   2. Initialize PushHelper class into your class
   3. Implement RequestDelegate
-  4. PushHelper class require 3 parameters, **"baseUrl", "key" and "requestDelegate"**
+  4. PushHelper class require 3 parameters, **baseUrl**, **key** and **requestDelegate**. 
      **baseUrl** is your domain **url** that already installed easypush server, and key is a **TOKEN** from your easypush server
   
   Example : 
