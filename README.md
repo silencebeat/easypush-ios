@@ -5,7 +5,7 @@
 # Requirements
   1. Ios 8 and above
   2. Using swift programming language
-  3. This project using [Alamofire](https://github.com/Alamofire/Alamofire "Alamofire") as the third party library to handle Http Request connection.
+  3. [Alamofire](https://github.com/Alamofire/Alamofire "Alamofire") library
 
 # How to use
   1. First you need to copy PushHelper.swift class into your project. 
